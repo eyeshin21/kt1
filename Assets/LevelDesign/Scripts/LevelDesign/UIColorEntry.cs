@@ -88,7 +88,7 @@ public class UIColorEntry : UI, IPointerDownHandler, IPointerUpHandler
                         shooterTileGrid[data.pos.x, data.pos.y].lockChain.SetUp(data.lockChainAxis, data.lockChainLength, data.lockChainCode);
                     }
 
-                    if (data.shooters.Count == 1)
+                    if (data.shooters.Count == 1 && data.tunnelDirection == Direction.None)
                     {
                         shooterTileGrid[data.pos.x, data.pos.y].SpawnShooter();
                         shooterTileGrid[data.pos.x, data.pos.y].shooter.SetUp(data.shooters[0]);

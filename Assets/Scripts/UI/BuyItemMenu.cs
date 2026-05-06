@@ -34,17 +34,17 @@ public class BuyItemMenu : UIMenu
             case eBooster.Undo:
                 titleTxt.text = "Undo";
                 contentTxt.text = "Move the placed block back to its original position.";
-                amountTxt.text = "x2";
+                //amountTxt.text = "x2";
                 break;
             case eBooster.ExtraSlot:
                 titleTxt.text = "Extra Slot";
                 contentTxt.text = "Move the three queued hooks up one row.";
-                amountTxt.text = "x2";
+                //amountTxt.text = "x2";
                 break;
             case eBooster.Swap:
                 titleTxt.text = "Swap";
                 contentTxt.text = "Swap one hook in the queue with any random hook.";
-                amountTxt.text = "x2";
+                //amountTxt.text = "x2";
                 break;
             case eBooster.AddSlot:
                 titleTxt.text = "Add Slot";
@@ -54,7 +54,7 @@ public class BuyItemMenu : UIMenu
             case eBooster.Magnet:
                 titleTxt.text = "Magnet";
                 contentTxt.text = "Instantly fill a selected waiting hook.";
-                amountTxt.text = "x2";
+                //amountTxt.text = "x2";
                 break;
         }
 
@@ -111,17 +111,17 @@ public class BuyItemMenu : UIMenu
             switch (eBooster)
             {
                 case eBooster.Undo:
-                    UserConfig.Instance.AmountUndo += 2;
+                    UserConfig.Instance.AmountUndo += 1;
                     Bridge.Instance.TrackBuyBooster("undo", UserConfig.Instance.CurLevel);
                     Bridge.Instance.LogSpendResource(UserConfig.Instance.CurLevel, "currency", "coin", price, "buy_booster", UserConfig.Instance.Coin);
                     break;
                 case eBooster.ExtraSlot:
-                    UserConfig.Instance.AmountExtraSlot += 2;
+                    UserConfig.Instance.AmountExtraSlot += 1;
                     Bridge.Instance.TrackBuyBooster("extra_slot", UserConfig.Instance.CurLevel);
                     Bridge.Instance.LogSpendResource(UserConfig.Instance.CurLevel, "currency", "coin", price, "buy_booster", UserConfig.Instance.Coin);
                     break;
                 case eBooster.Swap:
-                    UserConfig.Instance.AmountSwap += 2;
+                    UserConfig.Instance.AmountSwap += 1;
                     Bridge.Instance.TrackBuyBooster("swap", UserConfig.Instance.CurLevel);
                     Bridge.Instance.LogSpendResource(UserConfig.Instance.CurLevel, "currency", "coin", price, "buy_booster", UserConfig.Instance.Coin);
                     break;
@@ -131,7 +131,7 @@ public class BuyItemMenu : UIMenu
                     Bridge.Instance.LogSpendResource(UserConfig.Instance.CurLevel, "currency", "coin", price, "buy_booster", UserConfig.Instance.Coin);
                     break;
                 case eBooster.Magnet:
-                    UserConfig.Instance.AmountMagnet += 2;
+                    UserConfig.Instance.AmountMagnet += 1;
                     Bridge.Instance.TrackBuyBooster("magnet", UserConfig.Instance.CurLevel);
                     Bridge.Instance.LogSpendResource(UserConfig.Instance.CurLevel, "currency", "coin", price, "buy_booster", UserConfig.Instance.Coin);
                     break;

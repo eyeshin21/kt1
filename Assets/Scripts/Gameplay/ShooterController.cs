@@ -171,6 +171,7 @@ public class ShooterController : MonoBehaviour
         SetColor();
 
         txtCapacity.text = capacity.ToString();
+        txtCapacity.gameObject.SetActive(false);
 
         transform.localScale = Vector3.one;
     }
@@ -866,6 +867,7 @@ public class ShooterController : MonoBehaviour
             anim.SetBool("IsWalk", false);
 
             fakeHook.SetActive(true);
+            txtCapacity.gameObject.SetActive(true);
 
             ParkingManager.Instance.parkedShooters.Add(this);
 
@@ -1204,7 +1206,7 @@ public class ShooterController : MonoBehaviour
         objModel.SetActive(true);
 
         anim.SetBool("IsIdle", true);
-        txtCapacity.gameObject.SetActive(true);
+        //txtCapacity.gameObject.SetActive(true);
     }
 
     public void Active2()
@@ -1243,7 +1245,7 @@ public class ShooterController : MonoBehaviour
             objModel.SetActive(true);
 
             anim.SetBool("IsIdle", true);
-            txtCapacity.gameObject.SetActive(true);
+            //txtCapacity.gameObject.SetActive(true);
 
             if (isHidden)
             {
@@ -1312,7 +1314,7 @@ public class ShooterController : MonoBehaviour
                     objModel.SetActive(true);
 
                     anim.SetBool("IsIdle", true);
-                    txtCapacity.gameObject.SetActive(true);
+                    //txtCapacity.gameObject.SetActive(true);
 
                     if (isHidden)
                     {

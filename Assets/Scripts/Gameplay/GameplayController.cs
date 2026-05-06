@@ -658,16 +658,16 @@ public class GameplayController : Singleton<GameplayController>
             UIManager.Instance.ShowNewElementMenu(eTypeElement.LockAndKey);
             PlayerPrefs.SetInt("Introduce_" + eTypeElement.LockAndKey, 1);
         }
-        else if (UserConfig.Instance.CurLevel == GameConfig.LEVEL_UNLOCK_ELEMENT_CIRCLE_HOOK && !PlayerPrefs.HasKey("Introduce_" + eTypeElement.CircleHook))
-        {
-            UIManager.Instance.ShowNewElementMenu(eTypeElement.CircleHook);
-            PlayerPrefs.SetInt("Introduce_" + eTypeElement.CircleHook, 1);
-        }
-        else if (UserConfig.Instance.CurLevel == GameConfig.LEVEL_UNLOCK_ELEMENT_TRIANGLE_HOOK && !PlayerPrefs.HasKey("Introduce_" + eTypeElement.TriangleHook))
-        {
-            UIManager.Instance.ShowNewElementMenu(eTypeElement.TriangleHook);
-            PlayerPrefs.SetInt("Introduce_" + eTypeElement.TriangleHook, 1);
-        }
+        //else if (UserConfig.Instance.CurLevel == GameConfig.LEVEL_UNLOCK_ELEMENT_CIRCLE_HOOK && !PlayerPrefs.HasKey("Introduce_" + eTypeElement.CircleHook))
+        //{
+        //    UIManager.Instance.ShowNewElementMenu(eTypeElement.CircleHook);
+        //    PlayerPrefs.SetInt("Introduce_" + eTypeElement.CircleHook, 1);
+        //}
+        //else if (UserConfig.Instance.CurLevel == GameConfig.LEVEL_UNLOCK_ELEMENT_TRIANGLE_HOOK && !PlayerPrefs.HasKey("Introduce_" + eTypeElement.TriangleHook))
+        //{
+        //    UIManager.Instance.ShowNewElementMenu(eTypeElement.TriangleHook);
+        //    PlayerPrefs.SetInt("Introduce_" + eTypeElement.TriangleHook, 1);
+        //}
         else if (UserConfig.Instance.CurLevel == GameConfig.LEVEL_UNLOCK_ELEMENT_CRATE && !PlayerPrefs.HasKey("Introduce_" + eTypeElement.Crate))
         {
             UIManager.Instance.ShowNewElementMenu(eTypeElement.Crate);

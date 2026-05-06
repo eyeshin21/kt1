@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering;
+using XInputDotNetPure;
 
 public class LevelController : MonoBehaviour
 {
@@ -114,6 +115,7 @@ public class LevelController : MonoBehaviour
     #region Editor
 #if UNITY_EDITOR
     [Header("EDITOR")]
+    [SerializeField] private int amountLayerToKeep = 2;
     [SerializeField] private int amountScrewFirstLayer = 12;
     [SerializeField] private int amountScrewSecondLayer = 12;
     [SerializeField] private int amountScrewEachLayer = 12;
@@ -187,11 +189,25 @@ public class LevelController : MonoBehaviour
         {
             if (i == 0)
             {
-                amountScrewToSpawns.Add(amountScrewFirstLayer);
+                if (amountLayerToKeep == 0)
+                {
+                    amountScrewToSpawns.Add(amountScrewFirstLayer);
+                }
+                else
+                {
+                    amountScrewToSpawns.Add(0);
+                }
             }
             else if (i == 1)
             {
-                amountScrewToSpawns.Add(amountScrewSecondLayer);
+                if (amountLayerToKeep == 0)
+                {
+                    amountScrewToSpawns.Add(amountScrewSecondLayer);
+                }
+                else
+                {
+                    amountScrewToSpawns.Add(0);
+                }
             }
             else
             {
@@ -226,6 +242,8 @@ public class LevelController : MonoBehaviour
 
         for (int i = 0; i < amountScrewToSpawns.Count; i++)
         {
+            if (amountScrewToSpawns[i] == 0) continue;
+
             List<LevelLayer> randomLayers = new List<LevelLayer>();
             foreach (var layer in allLayers)
             {
@@ -313,6 +331,8 @@ public class LevelController : MonoBehaviour
 
         layerParent.localPosition = new Vector3(0, 6.0f, 0);
 
+        SetUp();
+
         //RandomScrewColor();
         CalculateTotal();
     }
@@ -356,6 +376,14 @@ public class LevelController : MonoBehaviour
             if (layerIndex > 9)
             {
                 layerIndex = 1;
+            }
+        }
+
+        if (amountLayerToKeep > 0)
+        {
+            for (int i = amountLayerToKeep; i < layers.Count; i++)
+            {
+                layers[i].gameObject.SetActive(false);
             }
         }
     }
@@ -1549,6 +1577,95 @@ public class LevelController : MonoBehaviour
         Debug.Log(txt);
     }
 
+    [ContextMenu("Export CSV")]
+    public void ExportCSV()
+    {
+        SetUp();
+
+        List<ColorEnum> allColors = new List<ColorEnum>();
+        List<Dictionary<ColorEnum, int>> layerColors = new List<Dictionary<ColorEnum, int>>();
+
+        for (int i = 0; i < layers.Count; i++)
+        {
+            Dictionary<ColorEnum, int> screwColorsDict = new Dictionary<ColorEnum, int>();
+
+            LevelLayer layer = layers[i];
+            for (int j = 0; j < layer.shapes.Count; j++)
+            {
+                ShapeController shape = layer.shapes[j];
+                for (int k = 0; k < shape.screws.Count; k++)
+                {
+                    ScrewController screw = shape.screws[k];
+
+                    if (!screwColorsDict.ContainsKey(screw.color))
+                    {
+                        screwColorsDict.Add(screw.color, 0);
+                    }
+
+                    screwColorsDict[screw.color]++;
+
+                    if (!allColors.Contains(screw.color))
+                    {
+                        allColors.Add(screw.color);
+                    }
+                }
+            }
+
+            layerColors.Add(screwColorsDict);
+        }
+
+        string content = "Layer,";
+        for (int i = 0; i < allColors.Count; i++)
+        {
+            if (i != allColors.Count - 1)
+            {
+                content += $"{allColors[i].ToString()},";
+            }
+            else
+            {
+                content += $"{allColors[i].ToString()}\n";
+            }
+        }
+
+        for (int i = 0; i < layerColors.Count; i++)
+        {
+            content += $"{i},";
+            var screwDict = layerColors[i];
+            for (int j = 0; j < allColors.Count; j++)
+            {
+                int amount = 0;
+                if (screwDict.ContainsKey(allColors[j]))
+                {
+                    amount = screwDict[allColors[j]];
+                }
+
+                if (j != allColors.Count - 1)
+                {
+                    content += $"{amount},";
+                }
+                else
+                {
+                    content += $"{amount}\n";
+                }
+            }
+        }
+
+        string path = System.IO.Path.Combine(Application.dataPath, "Resources", "LevelDataCSV");
+
+        if (!System.IO.Directory.Exists(path))
+        {
+            System.IO.Directory.CreateDirectory(path);
+        }
+        path = System.IO.Path.Combine(path, string.Concat(string.Format("{0}", gameObject.name), ".csv"));
+        System.IO.File.WriteAllText(path, content);
+
+#if UNITY_EDITOR
+        UnityEditor.AssetDatabase.Refresh();
+#endif
+
+        Debug.Log(string.Format("Export CSV level {0} success!!!", gameObject.name));
+    }
+
     [ContextMenu("Gen Layers From Old Data")]
     public void GenLayersFromOldData()
     {
@@ -1669,13 +1786,27 @@ public class LevelController : MonoBehaviour
     public void ResetLevel()
     {
         LevelLayer[] levelLayers = GetComponentsInChildren<LevelLayer>(true);
-        for (int i = 0; i < levelLayers.Length; i++)
+        for (int i = amountLayerToKeep; i < levelLayers.Length; i++)
         {
             UnityEditor.Undo.DestroyObjectImmediate(levelLayers[i].gameObject);
         }
 
         layers.Clear();
         screws.Clear();
+
+        levelLayers = GetComponentsInChildren<LevelLayer>(true);
+        for (int i = 0; i < levelLayers.Length; i++)
+        {
+            ScrewController[] screws = levelLayers[i].GetComponentsInChildren<ScrewController>(true);
+            if (i == 0)
+            {
+                amountScrewFirstLayer = screws.Length;
+            }
+            else if (i == 1)
+            {
+                amountScrewSecondLayer = screws.Length;
+            }
+        }
     }
 
     private ColorEnum GetTheMostColorInList(List<ColorEnum> colorEnums)

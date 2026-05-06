@@ -165,6 +165,8 @@ public class WinMenu : UIMenu
             }).SetEase(Ease.Linear);
         }
 
+        nextBtnAds.gameObject.SetActive(UserConfig.Instance.CurLevel >= 10);
+
         coinBonus = GameManager.Instance.GetCoinRewardLevel(UserConfig.Instance.CurLevel);
         coinSpin = coinBonus * 2;
 
