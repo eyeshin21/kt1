@@ -75,7 +75,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5946261091552672328
 Transform:
   m_ObjectHideFlags: 0
@@ -142,7 +142,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4697572320827878458
 Transform:
   m_ObjectHideFlags: 0
@@ -351,7 +351,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2944902896165450011
 Transform:
   m_ObjectHideFlags: 0
@@ -420,7 +420,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8209672770243094039
 Transform:
   m_ObjectHideFlags: 0
@@ -680,6 +680,7 @@ MonoBehaviour:
   screwsActive: []
   layerParent: {fileID: 8326034559659545101}
   currentActiveLayer: 1
+  amountLayerToKeep: 2
   amountScrewFirstLayer: 8
   amountScrewSecondLayer: 14
   amountScrewEachLayer: 12
@@ -4163,7 +4164,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &822668208844573545
 Transform:
   m_ObjectHideFlags: 0
@@ -5108,7 +5109,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &37976440173787081
 Transform:
   m_ObjectHideFlags: 0
@@ -5219,7 +5220,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2116369791878793063
 Transform:
   m_ObjectHideFlags: 0
@@ -5424,7 +5425,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4216235997341767300
 Transform:
   m_ObjectHideFlags: 0
@@ -5558,7 +5559,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3553419722504791865
 Transform:
   m_ObjectHideFlags: 0
@@ -5625,7 +5626,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2579292853561714425
 Transform:
   m_ObjectHideFlags: 0
@@ -8283,15 +8284,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 276608095298909943, guid: 7568eea299bbb65419e14fe05be6b23f, type: 3}
       propertyPath: m_Color.b
-      value: 0.13725491
+      value: 0.27058825
       objectReference: {fileID: 0}
     - target: {fileID: 276608095298909943, guid: 7568eea299bbb65419e14fe05be6b23f, type: 3}
       propertyPath: m_Color.g
-      value: 0.5176471
+      value: 0.27058825
       objectReference: {fileID: 0}
     - target: {fileID: 276608095298909943, guid: 7568eea299bbb65419e14fe05be6b23f, type: 3}
       propertyPath: m_Color.r
-      value: 1
+      value: 0.972549
       objectReference: {fileID: 0}
     - target: {fileID: 612570054112954231, guid: 7568eea299bbb65419e14fe05be6b23f, type: 3}
       propertyPath: m_Color.b
@@ -8383,7 +8384,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3637135996021692466, guid: 7568eea299bbb65419e14fe05be6b23f, type: 3}
       propertyPath: color
-      value: 8
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3956011206143402796, guid: 7568eea299bbb65419e14fe05be6b23f, type: 3}
       propertyPath: initialSkinName
@@ -8419,7 +8420,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7484293666404749762, guid: 7568eea299bbb65419e14fe05be6b23f, type: 3}
       propertyPath: initialSkinName
-      value: orange
+      value: red
       objectReference: {fileID: 0}
     - target: {fileID: 7515992286780573459, guid: 7568eea299bbb65419e14fe05be6b23f, type: 3}
       propertyPath: color
@@ -9654,7 +9655,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2363367432216856753, guid: c42f4ce84bf06014592a04710af955cc, type: 3}
       propertyPath: initialSkinName
-      value: orange
+      value: red
       objectReference: {fileID: 0}
     - target: {fileID: 2984216721519144035, guid: c42f4ce84bf06014592a04710af955cc, type: 3}
       propertyPath: m_Name
@@ -9674,15 +9675,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4956043023269523332, guid: c42f4ce84bf06014592a04710af955cc, type: 3}
       propertyPath: m_Color.b
-      value: 0.13725491
+      value: 0.27058825
       objectReference: {fileID: 0}
     - target: {fileID: 4956043023269523332, guid: c42f4ce84bf06014592a04710af955cc, type: 3}
       propertyPath: m_Color.g
-      value: 0.5176471
+      value: 0.27058825
       objectReference: {fileID: 0}
     - target: {fileID: 4956043023269523332, guid: c42f4ce84bf06014592a04710af955cc, type: 3}
       propertyPath: m_Color.r
-      value: 1
+      value: 0.972549
       objectReference: {fileID: 0}
     - target: {fileID: 6382157299885062452, guid: c42f4ce84bf06014592a04710af955cc, type: 3}
       propertyPath: m_ConnectedAnchor.x
@@ -9738,7 +9739,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8460118195245236545, guid: c42f4ce84bf06014592a04710af955cc, type: 3}
       propertyPath: color
-      value: 8
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8844645334255450323, guid: c42f4ce84bf06014592a04710af955cc, type: 3}
       propertyPath: m_Color.b
@@ -11985,7 +11986,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 26207625610177656, guid: 93255b870e869ef42ae45e40760b5477, type: 3}
       propertyPath: color
-      value: 8
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 657513769850578934, guid: 93255b870e869ef42ae45e40760b5477, type: 3}
       propertyPath: color
@@ -12057,7 +12058,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2708853179481838365, guid: 93255b870e869ef42ae45e40760b5477, type: 3}
       propertyPath: initialSkinName
-      value: orange
+      value: red
       objectReference: {fileID: 0}
     - target: {fileID: 2845753096920339766, guid: 93255b870e869ef42ae45e40760b5477, type: 3}
       propertyPath: initialSkinName
@@ -12069,15 +12070,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3598971769304089277, guid: 93255b870e869ef42ae45e40760b5477, type: 3}
       propertyPath: m_Color.b
-      value: 0.13725491
+      value: 0.27058825
       objectReference: {fileID: 0}
     - target: {fileID: 3598971769304089277, guid: 93255b870e869ef42ae45e40760b5477, type: 3}
       propertyPath: m_Color.g
-      value: 0.5176471
+      value: 0.27058825
       objectReference: {fileID: 0}
     - target: {fileID: 3598971769304089277, guid: 93255b870e869ef42ae45e40760b5477, type: 3}
       propertyPath: m_Color.r
-      value: 1
+      value: 0.972549
       objectReference: {fileID: 0}
     - target: {fileID: 4085032291959441715, guid: 93255b870e869ef42ae45e40760b5477, type: 3}
       propertyPath: m_Color.b
@@ -12109,15 +12110,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4727934540322501672, guid: 93255b870e869ef42ae45e40760b5477, type: 3}
       propertyPath: m_Color.b
-      value: 0.13725491
+      value: 0.27058825
       objectReference: {fileID: 0}
     - target: {fileID: 4727934540322501672, guid: 93255b870e869ef42ae45e40760b5477, type: 3}
       propertyPath: m_Color.g
-      value: 0.5176471
+      value: 0.27058825
       objectReference: {fileID: 0}
     - target: {fileID: 4727934540322501672, guid: 93255b870e869ef42ae45e40760b5477, type: 3}
       propertyPath: m_Color.r
-      value: 1
+      value: 0.972549
       objectReference: {fileID: 0}
     - target: {fileID: 4860823989987881475, guid: 93255b870e869ef42ae45e40760b5477, type: 3}
       propertyPath: m_Color.b
@@ -12133,7 +12134,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6195023680319038856, guid: 93255b870e869ef42ae45e40760b5477, type: 3}
       propertyPath: initialSkinName
-      value: orange
+      value: red
       objectReference: {fileID: 0}
     - target: {fileID: 6426870289278949762, guid: 93255b870e869ef42ae45e40760b5477, type: 3}
       propertyPath: initialSkinName
@@ -12157,7 +12158,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8085079645887257325, guid: 93255b870e869ef42ae45e40760b5477, type: 3}
       propertyPath: color
-      value: 8
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8275957886653144262, guid: 93255b870e869ef42ae45e40760b5477, type: 3}
       propertyPath: color
