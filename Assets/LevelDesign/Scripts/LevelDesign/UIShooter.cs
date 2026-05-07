@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using static System.Net.Mime.MediaTypeNames;
 
 public class UIShooter : UI, IPointerDownHandler, IPointerUpHandler
 {
@@ -16,6 +17,7 @@ public class UIShooter : UI, IPointerDownHandler, IPointerUpHandler
     public GameObject btnCreate;
     public GameObject btnRemove;
     public TextMeshProUGUI txtTotalColor;
+    public TextMeshProUGUI txtColorCount;
 
     [Header("Element")]
     public TMP_Dropdown dropdownElement;
@@ -166,6 +168,8 @@ public class UIShooter : UI, IPointerDownHandler, IPointerUpHandler
 
     public void UpdateTotalColor()
     {
+        Dictionary<ColorEnum, int> shooterDict = new Dictionary<ColorEnum, int>();
+
         List<ColorEnum> allColors = new List<ColorEnum>();
         if (LevelDesign.Instance.levelData.shooterTileDatas.Count > 0)
         {
@@ -173,15 +177,86 @@ public class UIShooter : UI, IPointerDownHandler, IPointerUpHandler
             {
                 foreach (var shooter in data.shooters)
                 {
-                    if (!allColors.Contains(shooter.color) && shooter.color != ColorEnum.None)
+                    if (shooter.color != ColorEnum.None)
                     {
-                        allColors.Add(shooter.color);
+                        if (!allColors.Contains(shooter.color))
+                        {
+                            allColors.Add(shooter.color);
+                        }
+
+                        if (!shooterDict.ContainsKey(shooter.color))
+                        {
+                            shooterDict.Add(shooter.color, 0);
+                        }
+
+                        shooterDict[shooter.color] += shooter.capacity;
                     }
                 }
             }
         }
 
         txtTotalColor.text = $"Total Color: {allColors.Count}";
+        txtColorCount.text = "";
+
+        if (int.TryParse(LevelDesign.Instance.UILevelDesign.levelInput.text, out int level))
+        {
+            LevelController currentLevel = Resources.Load<LevelController>($"Levels/Level_{level}");
+            if (currentLevel != null)
+            {
+                currentLevel.SetUp();
+                Dictionary<ColorEnum, int> screwDict = new Dictionary<ColorEnum, int>();
+
+                foreach (var screw in currentLevel.screws)
+                {
+                    if (screw.color != ColorEnum.None)
+                    {
+                        if (!allColors.Contains(screw.color))
+                        {
+                            allColors.Add(screw.color);
+                        }
+                        if (!screwDict.ContainsKey(screw.color))
+                        {
+                            screwDict.Add(screw.color, 0);
+                        }
+                        screwDict[screw.color]++;
+                    }
+                }
+
+                string txt = "";
+                foreach (var color in allColors)
+                {
+                    int amountShooter = 0;
+                    int amountScrew = 0;
+
+                    if (shooterDict.ContainsKey(color))
+                    {
+                        amountShooter = shooterDict[color];
+                    }
+
+                    if (screwDict.ContainsKey(color))
+                    {
+                        amountScrew = screwDict[color];
+                    }
+
+                    if (amountShooter == 0 && amountScrew == 0) continue;
+
+                    string colorText = "white";
+                    if (amountShooter == amountScrew)
+                    {
+                        colorText = "green";
+                    }
+                    else
+                    {
+                        colorText = "red";
+                    }
+
+                    txt += $"{color.ToString()}: <color={colorText}>{amountShooter}</color>/{amountScrew}<br>";
+                }
+
+                txtColorCount.text = txt;
+            }
+        }
+        
     }
 
     public void ResetSelectedTile()

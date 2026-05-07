@@ -1530,6 +1530,8 @@ public class LevelController : MonoBehaviour
             levelData = JsonConvert.DeserializeObject<LevelData>(SaveSystem.Decrypt(System.Convert.ToBase64String(textAsset.bytes), "DeoDucDu0cD@u"));
         }
 
+        List<ColorEnum> allColors = new List<ColorEnum>();
+
         Dictionary<ColorEnum, int> shooterColors = new Dictionary<ColorEnum, int>();
         int totalCapacity = 0;
         for (int i = 0; i < levelData.shooterTileDatas.Count; i++)
@@ -1540,39 +1542,71 @@ public class LevelController : MonoBehaviour
             {
                 ShooterData shooterData = shooterTileData.shooters[j];
 
-                if (!shooterColors.ContainsKey(shooterData.color))
+                if (shooterData.color != ColorEnum.None)
                 {
-                    shooterColors.Add(shooterData.color, 0);
-                }
+                    if (!allColors.Contains(shooterData.color))
+                    {
+                        allColors.Add(shooterData.color);
+                    }
 
-                shooterColors[shooterData.color] += shooterData.capacity;
-                totalCapacity += shooterData.capacity;
+                    if (!shooterColors.ContainsKey(shooterData.color))
+                    {
+                        shooterColors.Add(shooterData.color, 0);
+                    }
+
+                    shooterColors[shooterData.color] += shooterData.capacity;
+                    totalCapacity += shooterData.capacity;
+                }
             }
         }
-
-        string txt = "Shooter Colors:\n";
-        foreach (var kvp in shooterColors)
-        {
-            txt += $"{kvp.Key.ToString()}: {kvp.Value}\n";
-        }
-        txt += $"Total shooter capacity: {totalCapacity}\n\n";
 
         Dictionary<ColorEnum, int> screwColors = new Dictionary<ColorEnum, int>();
         foreach (var screw in screws)
         {
-            if (!screwColors.ContainsKey(screw.color))
+            if (screw.color != ColorEnum.None)
             {
-                screwColors.Add(screw.color, 0);
+                if (!allColors.Contains(screw.color))
+                {
+                    allColors.Add(screw.color);
+                }
+                if (!screwColors.ContainsKey(screw.color))
+                {
+                    screwColors.Add(screw.color, 0);
+                }
+                screwColors[screw.color]++;
             }
-            screwColors[screw.color]++;
         }
 
-        txt += "Screw Colors:\n";
-        foreach (var kvp in screwColors)
+        string txt = "Color: Screw/Shooter\n";
+        foreach (var color in allColors)
         {
-            txt += $"{kvp.Key.ToString()}: {kvp.Value}\n";
+            int amountShooter = 0;
+            int amountScrew = 0;
+
+            if (shooterColors.ContainsKey(color))
+            {
+                amountShooter = shooterColors[color];
+            }
+
+            if (screwColors.ContainsKey(color))
+            {
+                amountScrew = screwColors[color];
+            }
+
+            if (amountShooter == 0 && amountScrew == 0) continue;
+
+            string colorText = "white";
+            if (amountShooter == amountScrew)
+            {
+                colorText = "green";
+            }
+            else
+            {
+                colorText = "red";
+            }
+
+            txt += $"{color.ToString()}: <color={colorText}>{amountScrew}</color>/{amountShooter}\n";
         }
-        txt += $"Total screws: {screws.Count}";
 
         Debug.Log(txt);
     }
